@@ -15,7 +15,6 @@
 				position:absolute;
 				top:-800px;
 				left:280px;
-				
 			}
 		</style>
 	</head>
@@ -44,138 +43,68 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                        <?php
+                if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; }; 
+                $num_rec_per_page=6;
+                $start_from = ($page-1) * $num_rec_per_page; 
+                $sql = "SELECT * FROM proofread  LIMIT $start_from, $num_rec_per_page";
+                $sql_all = "SELECT * FROM proofread";
+                $result = $conn->query($sql_all);
+                $result_page = $conn->query($sql);
+                
+                $total_records = $result->num_rows;  // 统计总共的记录条数
+                $total_pages = ceil($total_records / $num_rec_per_page);  // 计算总页数
+                if ($result_page->num_rows > 0) {// 输出每行数据
+                    while($row = $result_page->fetch_assoc()) {
+                        ?>
                                     <tr>
                                         <td>
-                                            1
+                                           <?php echo $row['id']?>
                                         </td>
                                         <td>
-                                            111111111111111111111111111111111111
+                                            <?php echo $row['source']?>
                                         </td>
                                         <td>
-                                            这是一段测试翻译
+                                           <?php echo $row['target']?>
                                         </td>
+                                        <form method="post" action="PM_doReview.php">
                                         <td>
-                                            这是一段审校后的测试翻译
+                                          <input type="text" name="review" value="<?php echo $row['review']?>">  
+                                          <input type="hidden" name="id" value="<?php echo $row['id']?>">
                                         </td>
                     
                                         <td>
-                                            <button type="button" class="btn btn-default btn-danger">审校通过</button>
+                                            <button  class="btn btn-default btn-danger" href="PM_doReview.php">审校通过</a>
                                         </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            2
-                                        </td>
-                                        <td>
-                                            222222222222222222222222222222222222222222222222222222222222222
-                                        </td>
-                                        <td>
-                                            这是第二段测试翻译
-                                        </td>
-                                        <td>
-                                            这是第二段审校后的测试翻译
-                                        </td>
-                                        <td>
-                                                <button type="button" class="btn btn-default btn-danger">审校通过</button>
-                                            </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            3
-                                        </td>
-                                        <td>
-                                            3333333333333333333333333
-                                        </td>
-                                        <td>
-                                            这是第三段测试翻译
-                                        </td>
-                                        <td>
-                                            这是第三段审校后的测试翻译
-                                        </td>
-                                        <td>
-                                                <button type="button" class="btn btn-default btn-danger">审校通过</button>
-                                            </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            4
-                                        </td>
-                                        <td>
-                                            44444444444444444444444444444444444444444444444444444444444444444
-                                        </td>
-                                        <td>
-                                            这是第四段测试翻译
-                                        </td>
-                                        <td>
-                                            这是第四段审校后的测试翻译
-                                        </td>
-                                        <td>
-                                                <button type="button" class="btn btn-default btn-danger">审校通过</button>
-                                            </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            5
-                                        </td>
-                                        <td>
-                                            5555555555555555555555555555555555
-                                        </td>
-                                        <td>
-                                            没想到吧？还有第五段测试翻译
-                                        </td>
-                                        <td>
-                                            更没想到吧？还有第五段审校后的测试翻译
-                                        </td>
-                                        <td>
-                                                <button type="button" class="btn btn-default btn-danger">审校通过</button>
-                                            </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            6
-                                        </td>
-                                        <td>
-                                            66666666666666666666666666666666666666666666666666
-                                        </td>
-                                        <td>
-                                            好了，这是最后一段测试翻译，嘻嘻。
-                                        </td>
-                                        <td>
-                                            好了，这是最后一段审校后的测试翻译，嘻嘻。
-                                        </td>
-                                        <td>
-                                                <button type="button" class="btn btn-default btn-danger">审校通过</button>
-                                            </td>
+                                        </form>
                                     </tr>
                                     
+                               <?php
+                        }
+                    } else {
+                        echo "0 个结果";
+                        
+                    }
+                    ?>           
                                 </tbody>
                                     </table>
-                                    <ul class="pagination">
-                                <li>
-                                     <a href="#">Prev</a>
-                                </li>
-                                <li>
-                                     <a href="#">1</a>
-                                </li>
-                                <li>
-                                     <a href="#">2</a>
-                                </li>
-                                <li>
-                                     <a href="#">3</a>
-                                </li>
-                                <li>
-                                     <a href="#">4</a>
-                                </li>
-                                <li>
-                                     <a href="#">5</a>
-                                </li>
-                                <li>
-                                     <a href="#">Next</a>
-                                </li>
-                                <li>
-                                     <button type="button" class="btn btn-default btn-info"><a href="tmrevlist.html">返回审校列表</a></button>
-                                </li>
-                                    </ul>
+                                    <?php 
+            
+            echo "<ul class='pagination'>";
+            for ($i=1; $i<=$total_pages; $i++) { 
+                if(empty($uid)){
+                    echo "<li><a href='pagination.php?page=".$i."'>".$i."</a></li> "; 
+                }else{
+                    echo "<li><a href='pagination.php?page=".$i."&uid={$uid}'>".$i."</a></li> "; 
+                }
+                
+            }; 
+            echo "<li>
+                                     <button type='button' class='btn btn-default btn-info'><a href='tmrevlist.html'>返回审校列表</a></button>
+                                </li>";
+            echo "</ul>";
+            ?>      
+                                
 </div>                
 		</div>
     </body>

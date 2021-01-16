@@ -42,15 +42,28 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                                     <?php
+                if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; }; 
+                $num_rec_per_page=6;
+                $start_from = ($page-1) * $num_rec_per_page; 
+                $sql = "SELECT u.user_name,pd.id as pid,fl.filename FROM proofread as pd left join users u on u.user_id = pd.user_id left join flproject fl on fl.file_id = pd.file_id  LIMIT $start_from, $num_rec_per_page";
+                $sql_all = "SELECT * FROM proofread";
+                $result = $conn->query($sql_all);
+                $result_page = $conn->query($sql);
+                $total_records = $result->num_rows;  // 统计总共的记录条数
+                $total_pages = ceil($total_records / $num_rec_per_page);  // 计算总页数
+                if ($result_page->num_rows > 0) {// 输出每行数据
+                    while($row = $result_page->fetch_assoc()) {
+                        ?>
                                     <tr>
                                         <td>
-                                            1001
+                                            <?php echo $row['pid']?>
                                         </td>
                                         <td>
-                                            XXX_Project_001_text1
+                                           <?php echo $row['filename']?>
                                         </td>
                                         <td>
-                                            译者Username1
+                                            <?php echo $row['user_name']?>
                                         </td>
                                   
                     
@@ -58,89 +71,32 @@
                                                 <button type="button" class="btn btn-default btn-warning"><a href="tmreviews.html">审校</a></button>&nbsp;&nbsp;<button type="button" class="btn btn-default btn-danger">导出</button>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>
-                                            1002
-                                        </td>
-                                        <td>
-                                                XXX_Project_001_text2
-                                        </td>
-                                        <td>
-                                                译者Username2
-                                        </td>
-                                     
-                    
-                                        <td>
-                                            <button type="button" class="btn btn-default btn-warning"><a href="tmreviews.html">审校</a></button>&nbsp;&nbsp;<button type="button" class="btn btn-default btn-danger">导出</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            1003
-                                        </td>
-                                        <td>
-                                                XXX_Project_001_text3
-                                        </td>
-                                        <td>
-                                                译者Username1
-                                        </td>
-                                      
-                    
-                                        <td>
-                                            <button type="button" class="btn btn-default btn-warning"><a href="tmreviews.html">审校</a></button>&nbsp;&nbsp;<button type="button" class="btn btn-default btn-danger">导出</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                            <td>
-                                                1004
-                                            </td>
-                                            <td>
-                                                    XXX_Project_001_text4
-                                            </td>
-                                            <td>
-                                                    译者Username1
-                                            </td>
-                                         
+
+                                         <?php
+                        }
+                    } else {
+                        echo "0 个结果";
                         
-                                            <td>
-                                                <button type="button" class="btn btn-default btn-warning"><a href="tmreviews.html">审校</a></button>&nbsp;&nbsp;<button type="button" class="btn btn-default btn-danger">导出</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                                <td>
-                                                    1005
-                                                </td>
-                                                <td>
-                                                        XXX_Project_001_text5
-                                                </td>
-                                                <td>
-                                                        译者Username2
-                                                </td>
-                                          
-                                                <td>
-                                                    <button type="button" class="btn btn-default btn-warning"><a href="tmreviews.html">审校</a></button>&nbsp;&nbsp;<button type="button" class="btn btn-default btn-danger">导出</button>
-                                                </td>
-                                            </tr>
-                                    
+                    }
+                    ?>            
                                 </tbody>
                                     </table>
-                                    <ul class="pagination">
-                                <li>
-                                     <a href="#">上一页</a>
-                                </li>
-                                <li>
-                                     <a href="#">1</a>
-                                </li>
-                                <li>
-                                     <a href="#">2</a>
-                                </li>
-                                <li>
-                                     <a href="#">下一页</a>
-                                </li>
-                                <li>
-                                     <button type="button" class="btn btn-default btn-info"><a href="tmfilelist.html">返回文件列表</a></button>
-                                </li>
-                                    </ul>
+                                                                    <?php 
+            
+            echo "<ul class='pagination'>";
+            for ($i=1; $i<=$total_pages; $i++) { 
+                if(empty($uid)){
+                    echo "<li><a href='pagination.php?page=".$i."'>".$i."</a></li> "; 
+                }else{
+                    echo "<li><a href='pagination.php?page=".$i."&uid={$uid}'>".$i."</a></li> "; 
+                }
+                
+            }; 
+            echo "<li>
+                                     <button type='button' class='btn btn-default btn-info'><a href='tmrevlist.html'>返回审校列表</a></button>
+                                </li>";
+            echo "</ul>";
+            ?>  
                            
 </div>                
 		</div>
