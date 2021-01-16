@@ -1,5 +1,6 @@
+<!-- çŽ‹ç¿Šå†‰-->
 <?php
-     /*
-     ¶Ô·­Òë½øÐÐÔöÉ¾»òÕßÐÞ¸Ä²¢Ð´ÈëÊý¾Ý¿âÖÐ
-     */
+
+include_once dirname(dirname(dirname(dirname(__FILE__))))."/config.php";
+include_once dirname(dirname(dirname(dirname(dirname(__FILE__)))))."/web/PM/project_info/tmrevlist.html";
 ?>
