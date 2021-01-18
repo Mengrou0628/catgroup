@@ -1,23 +1,22 @@
 <?php
     /*
-    ÅÐ¶ÏµÇÂ¼×´Ì¬£ºÎ´µÇÂ¼ÏÔÊ¾µÇÂ¼×¢²áÑ¡Ïî£¬ÓÃ»§µÇÂ½ºóÇÐ»»ÏÔÊ¾³ÉêÇ³ÆºÍ×¢ÏúÑ¡Ïî
+    åˆ¤æ–­ç™»å½•çŠ¶æ€ï¼šæœªç™»å½•æ˜¾ç¤ºç™»å½•æ³¨å†Œé€‰é¡¹ï¼Œç”¨æˆ·ç™»é™†åŽåˆ‡æ¢æ˜¾ç¤ºæˆæ˜µç§°å’Œæ³¨é”€é€‰é¡¹
     */
 	session_start();
 	error_reporting(0);
 	
-	//°üº¬Êý¾Ý¿âÁ¬½ÓÎÄ¼þ
-	include('config.php');
-	$email = $_SESSION['sign-email'];
-	$password = $_SESSION['sign-password'];
-	$user=$_SESSION['sign-user']
+	//åŒ…å«æ•°æ®åº“è¿žæŽ¥æ–‡ä»¶
+	include('../config.php');
+	$_SESSION['login-email'] = $email;
+	$_SESSION['login-password'] = $password;
 
-	//¼ì²âÓÊÏä¼°ÃÜÂëÊÇ·ñÕýÈ·
+	//æ£€æµ‹é‚®ç®±åŠå¯†ç æ˜¯å¦æ­£ç¡®
 	$check_query = mysqli_query($config,"select user_name from users where Email='$email' and password='$password'");
 
 	if($result= mysqli_fetch_array($check_query)){
-    //µÇÂ¼³É¹¦
-    $_SESSION['sign-email'] = $email;
-    $_SESSION['sign-user'] = $result['user_name'];
+    //ç™»å½•æˆåŠŸ
+    $_SESSION['login-email'] = $email;
+    $_SESSION['login-name'] = $result['user_name'];
 	$name=$result['user_name'];
-    
+    }
 ?>
