@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/sign.css">
-    <script src="./jq/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="/meowcat/Resources/css/sign.css">
+    <script src="../Resources/js/jquery-3.3.1.min.js"></script>
     <title>MeowCAT</title>
 </head>
 <body>
     <div class="container">
-        <h1>登录</h1>
-        <form action="/meowcat/modules/Users/Users_login.php">
-            <input class="tbx" type="text" placeholder="请输入用户名...">
-            <input class="tbx" type="password" placeholder="请输入密码...">
+        <h1>用户登录</h1>
+        <form method="post" action="/meowcat/modules/Users/Users_login.php">
+            <input class="tbx" type="text" name="login-email" placeholder="请输入邮箱...">
+            <input class="tbx" type="password" name="login-password" placeholder="请输入密码...">
             <input class="sub" type="submit" value="登录">
         </form>
-		<button onclick="javascript:location.href='login.html'">没有账号？点此注册</button>
+		<button onclick="javascript:location.href='logup.html'">没有账号？点此注册</button>
     </div>
     <script>
         // 定义一个con绑定 .container
