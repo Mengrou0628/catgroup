@@ -1,0 +1,144 @@
+<!--王梦柔-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        	
+		<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+    $(function(){
+
+$(".same").click(function(){
+
+   $(this).siblings().attr("checked",false);
+
+   $(this).attr("checked",true);  
+
+    if($(this).attr("class").indexOf('tmxfile')>=0){  
+
+        $(this).siblings('.tmx').show();
+    }
+    else{
+
+        $(".tmxfile").siblings('.tmx').hide();
+    }
+});});
+$(function(){
+
+$(".same").click(function(){
+
+   $(this).siblings().attr("checked",false);
+
+   $(this).attr("checked",true);  
+
+    if($(this).attr("class").indexOf('xlsfile')>=0){  
+
+        $(this).siblings('.xls').show();
+    }
+    else{
+
+        $(".xlsfile").siblings('.xls').hide();
+    }
+});});
+</script>
+<script>
+  function createproject(){
+  var a=document.getElementById("1").value;
+  //alert(a);
+  var index1=document.getElementById("2").selectedIndex;
+  var b=document.getElementById("2").options[index1].value;
+  //alert(b);
+  var index2=document.getElementById("3").selectedIndex;
+  var c=document.getElementById("3").options[index2].value;
+  //alert(c);
+  var d=$('input[name="optionstmx"]:checked').val();//获取选中的单选的值
+  //alert(d);
+  var e=$('input[name="optionsxls"]:checked').val();
+  //alert(e);
+  var f=document.getElementById("4").value;
+  $.ajax({
+      url: 'http://localhost/meowcat/modules/Functions/Project/createproject_tm.php', 
+      method: 'post',
+      data: {"con1":a,"con2":b,"con3":c,"con4":d,"con5":e,"con6":f},
+      dataType: 'text',
+      async: false, 
+      success: function(data){
+        alert("创建项目成功！");
+       window.location.href="../PM/project_info/tmproject.html";
+    },
+      error:function(XMLHttpRequest, textStatus, errorThrown) {
+                alert('创建项目失败，请重试。');
+               
+}
+    });
+  }
+</script>
+<style>
+    .container
+    {
+      position:absolute;
+      top:-680px;
+      left:300px;
+      
+    }
+  
+  </style>
+    </head>
+    <body>
+        <script type="text/javascript" src="/meowcat/Resources/js/PM_navigation.js"></script>
+        <div class="container">
+                    <div class="col-md-12" style="margin-top: 50px;">
+                        <form role="form" enctype="multipart/form-data"><!-- enctype="multipart/form-data" 必须给form表单指定该属性，否则上传不了文件 -->
+                            <div class="form-group">
+                                <label for="name">项目名</label>
+                                <input id="1" type="text" class="form-control" placeholder="请输入项目名">
+                              </div>
+                              <div class="form-group">
+                                <label for="name">团队id</label>
+                                <input id="4" type="text" class="form-control" placeholder="请输入团队id">
+                              </div>
+                            <div class="form-inline">
+                              <label for="name">选择源语言</label>
+                              <select id="2" class="form-control">
+                                <option>中文</option>
+                                <option>英文</option>
+                              </select>
+                              <label for="name">选择目标语言</label>
+                              <select id="3" class="form-control">
+                                <option>中文</option>
+                                <option>英文</option>
+                              </select>
+                            </div>
+                        <br>
+                            <div>
+                                
+                            <input class="same" type="radio" name="optionstmx" id="optionsRadios1" value="option1" checked> 新建翻译记忆库
+                            <input class="same tmxfile" type="radio" name="optionstmx" id="optionsRadios2" value="option2">导入翻译记忆库   
+                                    
+                                
+                            <input type="file" id="inputfile" class="tmx" name="tmxfile" style="display:none">
+                            
+                           
+                       </div>
+                       <br>
+                       <div>
+                         
+                             
+                            <input class="same" type="radio" name="optionsxls" id="optionsRadios1" value="option1" checked> 新建术语库
+                            <input class="same xlsfile" type="radio" name="optionsxls" id="optionsRadios2" value="option2">导入术语库  
+                                   
+                            <input type="file" id="inputfile" class="xls" name="xlsfile" style="display:none">
+                         
+                           
+                       </div>
+                        <br>
+                            <button type="submit" class="btn btn-default" onclick="createproject()">创建项目</button>
+                            <button type="button" class="btn btn-default" onclick="history.back()">返回</button>
+                          </form>
+                    </div>
+               
+            </div>
+            
+    </body>
+</html>
