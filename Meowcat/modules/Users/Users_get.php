@@ -16,8 +16,13 @@
 
 	if($result= mysqli_fetch_array($check_query)){
     //登录成功
-    $_SESSION['login-email'] = $email;
-    $_SESSION['login-name'] = $result['user_name'];
-	$name=$result['user_name'];
+    		$_SESSION['login-email'] = $email;
+		$_SESSION['login-name'] = $result['user_name'];
+		$_SESSION['login-duty'] = $result['duty'];
+		$_SESSION['login-password'] = $password;
+		$_SESSION['login-id'] = $result['user_id'];
+		$name=$result['user_name'];
+		$duty=$result['duty'];
+		$id=$result['user_id'];
     }
 ?>
