@@ -1,4 +1,4 @@
-<!--武睿文-->
+<!--王梦柔-->
 <!DOCTYPE html>
 <html lang="zh-CN">
 	<head>
@@ -13,89 +13,76 @@
 			#content-0
 			{
 				position:absolute;
-				top:-700px;
-				left:400px;
+				top:-500px;
+				left:300px;
 				
 			}
-		</style>
+    </style>
+    <script>
+    function gettermlist(){
+      $.ajax({
+        url: 'http://localhost/meowcat/modules/Translators/Translator_info.php',//记得修改
+        method: 'post',
+        data: {},
+        dataType: 'json',
+        contentType: "application/json;charset=utf-8",
+        async: false, 
+        success: function(data){
+        //alert(data[0].project_id);
+        //var json = JSON.stringify(data);//格式化Json数据 
+        //alert(json);
+        $.each(data,function(i,n){   
+          html='<tr>';   
+            html+='<td>'+n.user_id+'</td>';
+            html+='<td>'+n.user_name+'</td>'; 
+            html+='<td>'+n.email+'</td>'; 
+            html+='<td>'+n.duty+'</td>'; 
+            html+='<td>'+n.field+'</td>'; 
+            $(".list").append(html);
+          });
+         
+        
+          // update termlist ul>li
+          // ......
+        },
+    
+      error:function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert('失败');
+                    alert(XMLHttpRequest.status);
+                    alert(XMLHttpRequest.readyState);
+                    alert(textStatus);
+    }
+                });   
+    }
+    </script>
 	</head>
 <body>
-	<script type="text/javascript" src="/meowcat/Resources/js/trans_navigation.js"></script>
-		<div id="content-0">
-<div class="col-sm-6">
-       <nav class="navbar navbar-default" role="navigation">
-<h2>译者个人信息</h2>
-      <div class="col-sm-25 col-md-20">
+  <script type="text/javascript" src="/meowcat/Resources/js/trans_navigation.js"></script>
+  <script> window.onload=function(){gettermlist();}</script>
+        
 
-        <table class="table table-hover">
-            <thead class="thead-dark">
+	<div id="content-0">
+    <h2>译者个人信息</h2>
+    <div class="container-fiuled col-md-10"  style="width:1200px;">
+        <table class="table table-striped table-hover" id="choose-address-table">
+          <thead>
+              <tr>
+                <th>个人ID</th>
+                <th>用户名</th>
+                <th>注册邮箱</th>
+                <th>身份（0：译者 1：项目经理）</th>
+                <th>擅长领域（1:经贸翻译 2:科技翻译 3:政宣文本 4:其他）</th>
+              </tr>
+            </thead>
+            <tbody class="list">
               
-            </thead>
-            <tbody>
-              <tr>
-                <td>绑定邮箱</td>
-                <td>Apple.com</td>
-              </tr>
-<tr>
-                <td>身份</td>
-                <td>个人译者</td>
-               
-              </tr>
-<tr>
-                <td>擅长领域</td>
-                <td>-</td>
-                
-              </tr>
             </tbody>
         </table>
       </div>
 </div>
 
-<div class="col-sm-12">
-       <nav class="navbar navbar-default" role="navigation">
-	<h2>译者所属团队信息</h2>
-      <div class="col-sm-25 col-md-25">
-        <table class="table table-hover">
-            <thead class="thead-dark">
-              <tr>
-                <th class="width:45px">团队ID</th>
-                <th>用户ID</th>
-                <th>身份</th>
-                
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Apple</td>
-                <td>1</td>
-                <td>English</td>
-               
-              </tr>
-<tr>
-                <td>Apple</td>
-                <td>1</td>
-                <td>English</td>
-                
-              </tr>
-<tr>
-                <td>Apple</td>
-                <td>1</td>
-                <td>English</td>
-                
-              </tr>
-            </tbody>
-        </table>
 
-        <div align="center" class="container-fluid" >
-            <ul class="pagination">
-                <li class="page-item"><a class="page-link" href="#">上一页</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">下一页</a></li>
-              </ul>
-        </div>
-      </div>
-</div>
-</div>
+
+      
+
 </body>
