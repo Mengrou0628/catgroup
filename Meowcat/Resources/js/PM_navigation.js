@@ -61,7 +61,7 @@ document.writeln("						<li class=\'row2-3\'>");
 document.writeln("							<a href=\'/meowcat/web/PM/project_info/tmmemos.html\'>翻译记忆库</a>");
 document.writeln("						</li>");
 document.writeln("						<li class=\'row2-3\'>");
-document.writeln("							<a href=\'/meowcat/web/common/taskmacht.html\'>机器翻译</a>");
+document.writeln("							<a href=\'/meowcat/web/common/taskmacht_PM.html\'>机器翻译</a>");
 document.writeln("						</li>");
 document.writeln("						<li class=\'row2-3\'>");
 document.writeln("							<a href=\'/meowcat/web/common/taskstyle_PM.html\'>风格指南</a>");
