@@ -1,5 +1,6 @@
+<!--王梦柔-->
 <html>
-    <head>
+<head>
 <meta charset=UTF-8>
 <!-- 新 Bootstrap 核心 CSS 文件 -->
 <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -9,6 +10,41 @@
  
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+  function gettermlist(){
+    $.ajax({
+      url: 'http://localhost/meowcat/modules/Translators/Translator_projects_tm.php',
+      method: 'post',
+      data: {},
+      dataType: 'json',
+      contentType: "application/json;charset=utf-8",
+      async: false, 
+      success: function(data){
+        $.each(data,function(i,n){   
+      html='<tr>';   
+        html+='<td class="nr">'+n.project_id+'</td>';
+        html+='<td>'+n.projectname+'</td>'; 
+        html+='<td><progress max="100" min="0" value="50"></progress></td><td style="text-align: center;"><button type="button" class="btn btn-default btn-link" onclick="trans(this)">查看</button><button type="button" class="btn btn-default btn-danger">完成</button></td></tr>';
+        $(".list").append(html);
+      });
+    },
+      error:function(XMLHttpRequest, textStatus, errorThrown) {
+                alert('失败');
+                alert(XMLHttpRequest.status);
+                alert(XMLHttpRequest.readyState);
+                alert(textStatus);
+}
+    });
+  }
+  </script>
+  <script type="text/javascript">
+    function trans(obj){
+      var $res=$(obj).closest('tr').find('.nr').html();
+      sessionStorage.setItem("project_id", $res);
+      //alert($res);
+      window.location.href="taskfiles_tm.html";
+    }
+  </script>
 <style>
   #content-0
   {
@@ -20,7 +56,8 @@
 </style>
     </head>
     <body>
-      <script type="text/javascript" src="/meowcat/Resources/js/PM_navigation.js"></script>
+      <script type="text/javascript" src="/meowcat/Resources/js/trans_navigation.js"></script>
+      <script> window.onload=function(){gettermlist();}</script>
       <div id="content-0">
  <div class="container-fluid col-md-10" style="width:1200px;">
                     
@@ -33,31 +70,7 @@
                                 <th style="text-align: center;">操作</th>
                               </tr>
                             </thead>
-                            <tbody>
-                              <tr>
-                                <td>Tanmay</td>
-                                <td>Bangalore</td>
-                                <td>
-                                    <progress max="100" min="0" value="50"></progress>
-                                </td>
-                                <td style="text-align: center;"><button type="button" class="btn btn-default btn-link">查看</button>
-                                  <button type="button" class="btn btn-default btn-danger">完成</button></td>
-                              </tr>
-                              <tr>
-                                <td>Sachin</td>
-                                <td>Mumbai</td>
-                                <td> <progress max="100" min="0" value="50"></progress></td>
-                                <td style="text-align: center;"><button type="button" class="btn btn-default btn-link">查看</button>
-                                  <button type="button" class="btn btn-default btn-danger">完成</button></td>
-                              </tr>
-                              <tr>
-                                <td>Uma</td>
-                                <td>Pune</td>
-                                <td> <progress max="100" min="0" value="50"></progress></td>
-                                <td style="text-align: center;">
-                                  <button type="button" class="btn btn-default btn-link">查看</button>
-                                  <button type="button" class="btn btn-default btn-danger">完成</button></td>
-                              </tr>
+                            <tbody class="list">
                             </tbody>
                           </table>
                     </div>
