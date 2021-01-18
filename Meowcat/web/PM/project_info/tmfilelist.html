@@ -1,4 +1,4 @@
-<!-- 王翊冉-->
+<!--王梦柔 王翊冉-->
 <!DOCTYPE html>
 <html lang="zh-CN">
 	<head>
@@ -13,17 +13,62 @@
 			#content-0
 			{
 				position:absolute;
-				top:-540px;
-				left:230px;
+				top:-770px;
+				left:290px;
 				
 			}
 		</style>
+		<script>
+			session_start();
+			function gettermlist(){
+			  var obj=sessionStorage.getItem("project_id");
+			  var obj1=sessionStorage.getItem("team_id");
+			  $.ajax({
+				url: 'http://localhost/meowcat/modules/PM/project_info/PM_doclist.php',//记得修改
+				method: 'post',
+				data: {"content":obj,"content1":obj1},
+				dataType: 'json',
+				contentType: "application/json;charset=utf-8",
+				async: false, 
+				success: function(data){
+			  $.each(data,function(i,n){   
+				html='<tr>';   
+				  html+='<td class="nr">'+n.file_id+'</td>';
+				  html+='<td>'+n.filename+'</td>'; 
+				  html+='<td class="ar">'+n.team_id+'</td>';
+				  html+='<td>'+n.project_id+'</td><td><button type="button" class="btn btn-default btn-warning" onclick="trans(this)">分配</button>&nbsp;&nbsp;<button type="button" class="btn btn-default btn-danger"><a href="tmrevlist.html">审校</a></button></td>';
+				  $(".list").append(html);
+				});
+			   
+			  
+				// update termlist ul>li
+				// ......
+			  },
+		  
+			error:function(XMLHttpRequest, textStatus, errorThrown) {
+						  alert('失败');
+						  alert(XMLHttpRequest.status);
+						  alert(XMLHttpRequest.readyState);
+						  alert(textStatus);
+		  }
+					  });   
+			}
+			</script>
+			<script>
+			  function trans(obj){
+				var $res=$(obj).closest('tr').find('.nr').html();
+               var $res1=$(obj).closest('tr').find('.ar').html();
+               sessionStorage.setItem("file_id", $res);
+               sessionStorage.setItem("team_id",$res1);
+				window.location.href="../user_info/tmasign.html";
+			  }
+			</script>
 	</head>
 <body>
 	<script type="text/javascript" src="/meowcat/Resources/js/PM_navigation.js"></script>
 		<div id="content-0">
                 <div class="container-fiuled col-md-10" style="width:1000px;">
-
+					<button type="button" class="btn btn-primary" style="margin-left:1000px;" onclick="window.location.href='/meowcat/web/to_upload/uploadfile_tm.html'">上传文件</button>
 			<table class="table table-striped table-hover">
 				<thead>
 					<tr>
@@ -34,93 +79,23 @@
 							文件名称
 						</th>
 						<th>
-							翻译进度
-                        </th>
+							团队ID
+						</th>
+						<th>
+							项目ID
+						</th>
                         <th>
                             操作
                         </th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr>
-						<td>
-							1001
-						</td>
-						<td>
-							XXX_Project_001_公司简介_text1
-						</td>
-						<td>
-							<progress max="100" min="0" value="80"></progress>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-default btn-warning"><a href="tmasign.html">分配</a></button>&nbsp;&nbsp;<button type="button" class="btn btn-default btn-danger"><a href="tmrevlist.html">审校</a></button>&nbsp;&nbsp;<button type="button" class="btn btn-default btn-warning"><a href="/meowcat/web/common/taskanals_PM.html">文本分析</button>
-                        </td>
-					</tr>
-					<tr>
-						<td>
-							1002
-						</td>
-						<td>
-                                XXX_Project_001_公司简介_text2
-						</td>
-						<td>
-                            <progress max="100" min="0" value="50"></progress>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-default btn-warning"><a href="tmasign.html">分配</a></button>&nbsp;&nbsp;<button type="button" class="btn btn-default btn-danger"><a href="tmrevlist.html">审校</a></button>&nbsp;&nbsp;<button type="button" class="btn btn-default btn-warning"><a href="/meowcat/web/common/taskanals_PM.html">文本分析</button>
-
-                        </td>
-					</tr>
-					<tr>
-						<td>
-							1003
-						</td>
-						<td>
-                                XXX_Project_001_公司简介_text3
-						</td>
-						<td>
-                            <progress max="100" min="0" value="50"></progress>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-default btn-warning"><a href="tmasign.html">分配</a></button>&nbsp;&nbsp;<button type="button" class="btn btn-default btn-danger"><a href="tmrevlist.html">审校</a></button>&nbsp;&nbsp;<button type="button" class="btn btn-default btn-warning"><a href="/meowcat/web/common/taskanals_PM.html">文本分析</button>
-							</td>
-                    </tr>
-                    <tr>
-                            <td>
-                                1004
-                            </td>
-                            <td>
-                                    XXX_Project_001_公司简介_text4
-                            </td>
-                            <td>
-                                <progress max="100" min="0" value="50"></progress>
-                            </td>
-                            <td>
-								<button type="button" class="btn btn-default btn-warning"><a href="tmasign.html">分配</a></button>&nbsp;&nbsp;<button type="button" class="btn btn-default btn-danger"><a href="tmrevlist.html">审校</a></button>&nbsp;&nbsp;<button type="button" class="btn btn-default btn-warning"><a href="/meowcat/web/common/taskanals_PM.html">文本分析</button>
-								</td>
-                        </tr>
+				<tbody class="list">
+					
                     
 				</tbody>
-                    </table>
-                </div>
-					<ul class="pagination">
-				<li>
-					 <a href="#">上一页</a>
-				</li>
-				<li>
-					 <a href="#">1</a>
-				</li>
-				<li>
-					 <a href="#">2</a>
-				</li>
-				<li>
-					 <a href="#">下一页</a>
-				</li>
-				<li>
-					 <button type="button" class="btn btn-default btn-info"><a href="tmproject.html">返回项目列表</a></button>
-				</li>
-					</ul>
-		        </div>
+					</table>
+					
+		
 			</div>
 
 		</div>
