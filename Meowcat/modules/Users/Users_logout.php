@@ -7,10 +7,11 @@
 	error_reporting(0);
 
 	if($_GET['action'] == "logout"){
-    	unset($_SESSION['login-email']);
+ 	unset($_SESSION['login-email']);
     	unset($_SESSION['login-name']);
 	unset($_SESSION['login-duty']);
 	unset($_SESSION['login-password']);
+	unset($_SESSION['login-id']);
 	}
 	header("Location: /meowcat/web/main/index.html");
 ?>
