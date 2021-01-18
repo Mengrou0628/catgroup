@@ -1,5 +1,25 @@
 <?php
-     /*
-     ½«·­ÒëÎÄµµÖÐµÄ¾ä¶Î½øÐÐÇÐ·Ö(Õë¶ÔwordÐÎÊ½µÄÔ­ÎÄµµ)
-     */
+/**
+* functionï¼šä½¿ç”¨PHPWordæ–¹å¼è¯»docæ–‡ä»¶
+* authorï¼šçŽ‹æ¢¦æŸ”
+* dateï¼š2020.01.16
+**/
+
+//require_once('../../../modules/config.php');
+//session_start();
+
+require_once '../../../../Resources/PhpWord/IOFactory.php';
+require_once '../../../../Resources/PhpWord/PhpWord.php';
+require_once '../../../../vendor/autoload.php';
+//$source = '../../../Resources/transfiles/'.$_FILES["fileup"]["name"];
+//$info = '../../../Resources/transfiles/'.$_FILES["fileup"]["name"];
+$info="test.docx";
+$sections = IOFactory::load($info);
+//$elements=array();
+//array_push($elements, $section->getElements());
+foreach($sections->getSections() as $section){
+     foreach($section->getElements() as $element){
+          echo $element->getElements()[0]->gettext()."\n";
+     }
+}
 ?>
