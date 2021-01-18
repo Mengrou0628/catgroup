@@ -1,108 +1,66 @@
+<!--王梦柔-->
 <html>
     <head>
-  <!-- 鏂� Bootstrap 鏍�?�績 CSS 鏂囦�? -->
-<link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
- 
-<!-- jQuery鏂囦欢銆傚�?�蹇�?湪bootstrap.min.js 涔�??墠�??曞叆 -->
-<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
- 
-<!-- 鏈€鏂扮�? Bootstrap 鏍�?�績 JavaScript 鏂囦�? -->
-<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <meta charset="utf-8">
+        	
+		<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+      function inputfile(){
+  var a=document.getElementById("filename").value;
+  //alert(a);
+  
+  $.ajax({
+      url: 'http://localhost/meowcat/modules/Functions/Translation/Translation_TrImport.php', 
+      method: 'post',
+      data: {"con1":a},
+      dataType: 'text',
+      async: false, 
+      success: function(data){
+        alert("上传文件成功！");
+       window.location.href="../translator/to_translate/taskfiles.html";
+    },
+      error:function(XMLHttpRequest, textStatus, errorThrown) {
+                alert('上传文件失败，请重试。');
+               
+}
+    });
+  }
+    </script>
+    <style>
+      .container
+      {
+        position:absolute;
+        top:-680px;
+        left:300px;
+        
+      }
+    
+    </style>
     </head>
+    
     <body>
+      <script type="text/javascript" src="/meowcat/Resources/js/trans_navigation.js"></script>
         <div class="container">
-            <div class="row clearfix">
-                <div class="col-md-12 column">
-                    <nav class="navbar navbar-default" role="navigation">
-                        <div class="navbar-header">
-                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="#">Brand</a>
-                        </div>
-                        
-                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                            <ul class="nav navbar-nav">
-                                <li class="active">
-                                     <a href="#">Link</a>
-                                </li>
-                                <li>
-                                     <a href="#">Link</a>
-                                </li>
-                                <li class="dropdown">
-                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown<strong class="caret"></strong></a>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                             <a href="#">Action</a>
-                                        </li>
-                                        <li>
-                                             <a href="#">Another action</a>
-                                        </li>
-                                        <li>
-                                             <a href="#">Something else here</a>
-                                        </li>
-                                        <li class="divider">
-                                        </li>
-                                        <li>
-                                             <a href="#">Separated link</a>
-                                        </li>
-                                        <li class="divider">
-                                        </li>
-                                        <li>
-                                             <a href="#">One more separated link</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <form class="navbar-form navbar-left" role="search">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" />
-                                </div> <button type="submit" class="btn btn-default">Submit</button>
-                            </form>
-                            <ul class="nav navbar-nav navbar-right">
-                                <li>
-                                     <a href="#">Link</a>
-                                </li>
-                                <li class="dropdown">
-                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown<strong class="caret"></strong></a>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                             <a href="#">Action</a>
-                                        </li>
-                                        <li>
-                                             <a href="#">Another action</a>
-                                        </li>
-                                        <li>
-                                             <a href="#">Something else here</a>
-                                        </li>
-                                        <li class="divider">
-                                        </li>
-                                        <li>
-                                             <a href="#">Separated link</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        
-                    </nav>
+           
                    
                     <div class="col-md-12">
                         <form role="form">
                             <div class="form-group">
-                              <label for="name">�ļ���</label>
-                              <input type="text" class="form-control" id="name" placeholder="�������ļ���">
+                              <label for="name">文件名</label>
+                              <input type="text" class="form-control" id="filename" placeholder="请输入文件名">
                             </div>
                             <div class="form-group">
-                              <label for="inputfile">ѡ���ļ�</label>
-                              <input type="file" id="inputfile">
-                              <p class="help-block">֧���ļ���ʽ .txt .doc .xlsx</p>
+                              <label for="inputfile">上传文件</label>
+                              <input type="file" id="inputfile" name="fileup">
+                              <p class="help-block">֧支持格式 .txt （.doc）</p>
                             </div>
-                            <button type="submit" class="btn btn-default">�ϴ�</button>
+                            <button type="submit" class="btn btn-default" onclick="inputfile()">上传文件</button>
                           </form>
                           
                     </div>
-                </div>
-            </div>
-            
-            </div>
+              
         </div>
     </body>
 </html>
