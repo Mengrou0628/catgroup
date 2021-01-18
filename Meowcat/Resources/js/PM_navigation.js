@@ -3,7 +3,7 @@ new_element.setAttribute("rel","stylesheet");
 new_element.setAttribute("type","text/css");
 new_element.setAttribute("href","/meowcat/Resources/css/navi_css.css");
 document.body.appendChild(new_element);
-
+document.writeln("<?php include(\'User_get.php\'); ?>");
 document.writeln("    	<div class=\'container-fiuled\' id=\'row1\'>");
 document.writeln("			<div class=\'row clearfix\'>");
 document.writeln("				<div class=\'col-md-12 column\'>");
