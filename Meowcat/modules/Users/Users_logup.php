@@ -1,47 +1,56 @@
 <?php
     /*
-    ÓÃ»§½øĞĞ×¢²á
+    ç”¨æˆ·è¿›è¡Œæ³¨å†Œ
     */
-	
+	header("content-type:text/html;charset=utf-8");
 	if(!isset($_POST['submit2'])){
-		exit('·Ç·¨·ÃÎÊ!');
+		exit('éæ³•è®¿é—®!');
 	}
-	$username = $_POST['login-username'];
-	$password = $_POST['login-password'];
-	$email = $_POST['login-email'];
+	$username = $_POST['logup-username'];
+	$password = $_POST['logup-password'];
+	$email = $_POST['logup-email'];
+	$repeatpassword=$_POST['repeat-password'];
+	$field=$_POST['logup-field'];
+	$duty=$_POST['logup-duty'];
 	
-	//×¢²áĞÅÏ¢ÅĞ¶Ï
+	//æ³¨å†Œä¿¡æ¯åˆ¤æ–­
 	if(!preg_match('/^[\w\x80-\xff]{3,15}$/', $username)){
-	echo'<div align=center><img src="wrong.jpg" width="150px" height="60px"></div>';
-		exit('<div text=center>´íÎó£ºÓÃ»§Ãû²»·ûºÏ¹æ¶¨¡£<a href="javascript:history.back(-1);">·µ»Ø</a></div>');
+	echo'<div style="text-align:center"><img src="/meowcat/image/wrong.jpg" width="150px" height="100px"></div>';
+		exit('<div style="text-align:center">é”™è¯¯ï¼šç”¨æˆ·åä¸ç¬¦åˆè§„å®šã€‚<a href="javascript:history.back(-1);">è¿”å›</a></div>');
 	}
 	if(strlen($password) < 6){
-	echo'<div align=center><img src="wrong.jpg" width="150px" height="60px"></div>';
-		exit('<div text=center>´íÎó£ºÃÜÂë³¤¶È²»·ûºÏ¹æ¶¨¡£<a href="javascript:history.back(-1);">·µ»Ø</a><div>');
+	echo'<div align=center><img src="/meowcat/image/wrong.jpg" width="150px" height="100px"></div>';
+		exit('<div style="text-align:center">é”™è¯¯ï¼šå¯†ç é•¿åº¦ä¸ç¬¦åˆè§„å®šã€‚<a href="javascript:history.back(-1);">è¿”å›</a><div>');
+	}
+	if($repeatpassword!=$password){
+	echo'<div align=center><img src="/meowcat/image/wrong.jpg" width="150px" height="100px"></div>';
+		exit('<div style="text-align:center">é”™è¯¯ï¼šä¸¤æ¬¡å¯†ç å¡«å†™ä¸ä¸€è‡´ã€‚<a href="javascript:history.back(-1);">è¿”å›</a><div>');
 	}
 	if(!preg_match('/^([0-9A-Za-z\\-_\\.]+)@([0-9a-z]+\\.[a-z]{2,3}(\\.[a-z]{2})?)$/i', $email)){
-		echo'<div align=center><img src="wrong.jpg" width="150px" height="60px"></div>';
-    exit('<div text=center>´íÎó£ºµç×ÓÓÊÏä¸ñÊ½´íÎó¡£<a href="javascript:history.back(-1);">·µ»Ø</a></div>');
+		echo'<div align=center><img src="/meowcat/image/wrong.jpg" width="150px" height="100px"></div>';
+    exit('<div style="text-align:center">é”™è¯¯ï¼šç”µå­é‚®ç®±æ ¼å¼é”™è¯¯ã€‚<a href="javascript:history.back(-1);">è¿”å›</a></div>');
 	}
 
-	//°üº¬Êı¾İ¿âÁ¬½ÓÎÄ¼ş
-	include('config.php');
-	//¼ì²âÓÃ»§ÃûÊÇ·ñÒÑ¾­´æÔÚ
+	//åŒ…å«æ•°æ®åº“è¿æ¥æ–‡ä»¶
+	include('../config.php');
+	//æ£€æµ‹ç”¨æˆ·åæ˜¯å¦å·²ç»å­˜åœ¨
 	$check_query = mysqli_query($config,"select email from users where Email='$email' limit 1");
 	if(mysqli_fetch_array($check_query)){
-		echo'<div align=center>×¢²áÎÊÌâ</div>';
-		echo '<div text=center>´íÎó£ºÓÊÏä ',$email,' ÒÑ×¢²áÊ¹ÓÃ¡£<a href="javascript:history.back(-1);">·µ»Ø</a>';
+		echo'<div align=center><img src="/meowcat/image/wrong.jpg" width="150px" height="100px"></div>';
+		echo '<div style="text-align:center">é”™è¯¯ï¼šé‚®ç®± ',$email,' å·²æ³¨å†Œä½¿ç”¨ã€‚<a href="javascript:history.back(-1);">è¿”å›</a>';
 		exit;
 	}
+	$id=$duty+$field+$password;
+	//å†™å…¥æ•°æ®
+	$sql = "INSERT INTO users(user_id,user_name,password,email,duty,field)VALUES('$id','$username','$password','$email','$duty','$field')";
 
-	//Ğ´ÈëÊı¾İ
-	$sql = "INSERT INTO users(user_name,password,email)VALUES('$username','$password','$email')";
 	if(mysqli_query($config,$sql)){
-		exit('<div align=center><img src="success.png" width="150px" height="60px"><font color=red>ÄúÒÑ³É¹¦×¢²á¸ÃÏµÍ³£¡Çëµã»÷´Ë´¦ </font><a href="login.html">µÇÂ¼</a></div>');
+		echo'<div align=center><img src="/meowcat/image/success.png" width="300px" height="120px"></div>';
+		exit('<div align=center><font color=red>æ‚¨å·²æˆåŠŸæ³¨å†Œè¯¥ç³»ç»Ÿï¼è¯·ç‚¹å‡»æ­¤å¤„ </font><a href="/meowcat/web/main/index.html">ç™»å½•</a></div>');
 	} 
 	else {
-		echo '±§Ç¸£¡Ìí¼ÓÊı¾İÊ§°Ü£º',mysqli_error($conn),'<br />';
-		echo 'µã»÷´Ë´¦ <a href="javascript:history.back(-1);">·µ»Ø</a> ÖØÊÔ';
+		echo 'æŠ±æ­‰ï¼æ·»åŠ æ•°æ®å¤±è´¥ï¼š',mysqli_error($config),'<br />';
+		echo 'ç‚¹å‡»æ­¤å¤„ <a href="javascript:history.back(-1);">è¿”å›</a> é‡è¯•';
 	}
 	
 ?>
