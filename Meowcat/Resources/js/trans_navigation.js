@@ -1,3 +1,4 @@
+document.writeln("<!--王紫-->");
 new_element=document.createElement("link");
 new_element.setAttribute("rel","stylesheet");
 new_element.setAttribute("type","text/css");
