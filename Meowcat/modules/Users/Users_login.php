@@ -31,8 +31,10 @@
 		$_SESSION['login-name'] = $result['user_name'];
 		$_SESSION['login-duty'] = $result['duty'];
 		$_SESSION['login-password'] = $password;
+		$_SESSION['login-id'] = $result['user_id'];
 		$name=$result['user_name'];
 		$duty=$result['duty'];
+		$id=$result['user_id'];
 		if($duty==1)
 		{
 			header("Location: /meowcat/web/PM/tmlist.html");
