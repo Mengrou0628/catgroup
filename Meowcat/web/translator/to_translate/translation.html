@@ -1,74 +1,116 @@
-<!--武睿文-->
+<!--王梦柔-->
 <!DOCTYPE html>
 <html lang="zh-CN">
 	<head>
 		<meta charset="utf-8">
 		<title></title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-		
 		<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 		<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<style>
-			#content-0
-			{
+      <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+      <script src="../../../Resources/js/bootstable.js"></script>
+      <script src="../../../Resources/js/script.js"></script>
+
+<!--jqgrid可编辑表格-->
+<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.css" />
+<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid-theme.min.css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.js"></script>
+      
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.js"></script>
+<!-- Le styles -->
+<link href="http://fonts.googleapis.com/css?family=Oxygen|Marck+Script" rel="stylesheet" type="text/css">
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>   
+      <style>
+          
+	
+	
+			
+         #addterm{
+            position:absolute;
+				top:-550px;
+				left:300px;
+         }
+         #content-1
+         {
+            position:absolute;
+				top:-500px;
+				left:1200px;
+
+         }
+      </style>
+       <style>
+         #jsGrid{
+         font-size: 15px;
+    
+         
 				position:absolute;
-				top:-700px;
-				left:400px;
+				top:-500px;
+				left:300px;
 				
-			}
-		</style>
+          }
+         </style>
 	</head>
 <body>
 	<script type="text/javascript" src="/meowcat/Resources/js/trans_navigation.js"></script>
-		<div id="content-0">
-			
-  <div class="row" style="margin-left:0">
-    <div class="col-sm-9">
-   <div class="col-sm-20 col-md-10">
-        <table class="table table-hover">
-            <thead class="thead-dark">
-              <tr>
-                <th class="width:20px">句段序号</th>
-                <th>原文</th>
-                <th>译文</th>
-<th>确认</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td></td>
-                <td contenteditable="true">john@example.com</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Moe</td>
-                <td contenteditable="true">mary@example.com</td>
-<td></td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Dooley</td>
-                <td contenteditable="true">july@example.com</td>
-<td></td>
-              </tr>
-            </tbody>
-        </table>
+<div class="main-area dashboard">
 
-        <div class="container-fluid" align="center">
-            <ul class="pagination">
-                <li class="page-item"><a class="page-link" href="#">上一页</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">下一页</a></li>
-              </ul>
-        </div>
-      </div>
-  </div>
-	
- <div class="col-sm-3">
+   <div class="row">
+       
+      <div class="span10"> 
+<!--可编辑表格-->
+<script src="js/jquery.min.js"></script>
+            <script src="js/bootstrap.min.js"></script>
+            <script src="js/scripts.js"></script>
+            <div class = "jsGrid" id="jsGrid"></div>
+			
+			
+</div></div></div>
+<!-- 按钮触发模态框 -->
+<button id="addterm" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">添加术语</button>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" 
+						aria-hidden="true">×
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					添加术语
+				</h4>
+         </div>
+         
+			<div class="modal-body">
+            <form>
+				<div class="form-inline">
+               <div class="form-group">
+                  <label for="name">英语</label>
+                  <input id="1" type="text" class="form-control" placeholder="请添加英语术语">
+                </div>
+                <div class="form-group">
+                  <label for="name">中文</label>
+                  <input id="2" type="text" class="form-control" placeholder="请添加中文术语">
+                </div>
+             </div>
+             </form>
+         </div>
+         
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" 
+						data-dismiss="modal">关闭
+				</button>
+				<button type="button" class="btn btn-primary" onclick="addterm()">
+				  添加术语
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+ <div class="col-md-3" id="content-1">
        <nav class="navbar navbar-default" role="navigation">
 	<div class="container-fluid"> 
 	
@@ -93,10 +135,7 @@
 </table>
 	</div>
 </nav>
-</div>
 
-       
-<div class="col-sm-3"> 
 <nav class="navbar navbar-default" role="navigation">
 <div class="container-fluid"> 
 <table class="table">
@@ -122,6 +161,90 @@
         </div>
   </nav>
 </div>		
-		</div>
 </body>
 </html>
+<script>  
+function addterm(){
+   var a=document.getElementById("1").value;
+   var b=document.getElementById("2").value;
+   $.ajax({
+      url: 'http://localhost/meowcat/modules/Functions/Terms/Trans_term_add.php', 
+      method: 'post',
+      data: {"con1":a,"con2":b,"duty":"translator"},
+      dataType: 'text',
+      async: false, 
+      success: function(data){
+        alert("添加成功！");
+       
+    },
+      error:function(XMLHttpRequest, textStatus, errorThrown) {
+                alert('添加失败！');
+               
+}
+    });
+
+}     
+   jQuery.noConflict();
+   $("#jsGrid").jsGrid
+   (
+      {
+           width: "70%",
+           height: "600px",
+      
+           autoload:true,
+           inserting: false,
+           editing: true,
+           sorting: true,
+           //paging: true,
+         filtering:false,	
+         controller: 
+         {
+            loadData: function(filter)
+            {  var obj=sessionStorage.getItem("file_id");
+               return $.ajax
+               (
+                  {
+                     type: "POST",
+                     url: 'http://localhost/meowcat/modules/Functions/Translation/Translation_show.php',
+                     data: {"content":obj,"duty":"translator"},
+                     contentType: "application/json;charset=utf-8",
+                     dataType: "json",
+                     success: function(data){
+    
+                $.each(data,function(i,n){   
+                  $("#jsGrid").jqGrid('addRowData',i+1,n);
+      });
+     
+    
+      // update termlist ul>li
+      // ......
+    },
+                  }
+               );
+            },	
+            updateItem: function(item)
+            {
+               return $.ajax
+               (
+                  {
+                     type: "PUT",
+                     url: "http://localhost/meowcat/modules/Functions/Translation/Translation_show.php",
+                     data: item
+                  }
+                  );
+            },	
+           },
+         fields: [
+               { name: "Source", type: "text", width: 60, editable:false},
+               { name: "Target", type: "text", width: 60, editable:true},
+               { name: "Confirm", edittype: "button" ,width:20,editable:false,formatter: function(cellvalue,rows,rowobject){
+                  return "<button class='btn btn-primary ' οnclick= 'transconfirm("+rows.Source+","+rows.Target+")' >确认</button>" ;
+               }}
+           ],
+         
+         
+         
+      } 
+   );
+   
+   </script>
