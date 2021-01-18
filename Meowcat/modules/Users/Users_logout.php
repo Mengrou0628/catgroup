@@ -1,11 +1,15 @@
 <?php
     /*
-    ÓÃ»§ÍË³öµÇÂ¼
+    ç”¨æˆ·é€€å‡ºç™»å½•
     */
 	session_start();
 	error_reporting(0);
 
 	if($_GET['action'] == "logout"){
-    unset($_SESSION['sign-email']);
-    unset($_SESSION['sign-name']);
+    	unset($_SESSION['login-email']);
+    	unset($_SESSION['login-name']);
+	unset($_SESSION['login-duty']);
+	unset($_SESSION['login-password']);
+	}
+	header("Location: /meowcat/web/main/index.html");
 ?>
