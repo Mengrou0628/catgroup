@@ -9,12 +9,20 @@
 		<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 		<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
 		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script language="javascript">
+function print()
+{
+var a=myfrom.name.value;
+alert(a);
+}
+</script>
 		<style>
                                                     #box{
 
         width: 400px;
 
-        margin:30px auto;
+        margin-top:80px;
+margin-left:100px;
 
         font-family: 'Microsoft YaHei';
 
@@ -23,9 +31,10 @@
     }
 #search{
 
-        width: 78px;
+        width: 100px;
 
         height: 32px;
+margin-top:50px;
 
         float: right;
 
@@ -48,8 +57,9 @@
 			#content-0
 			{
 				position:absolute;
-				top:-700px;
-				left:400px;
+				top:-650px;
+				left:350px;
+height:50px;
 				
 			}
 		</style>
@@ -58,11 +68,11 @@
 	<script type="text/javascript" src="/meowcat/Resources/js/PM_navigation.js"></script>
 		<div id="content-0">
 
-<div class="container-fluid col-md-8" style="margin-top:100px;margin-right:8cm;margin-left:5cm">
+<div class="container-fluid col-md-8" style="margin-top:120px;margin-right:8cm;margin-left:5cm">
 
 <nav class="navbar navbar-default" role="navigation">
 <div id="box">
-<form action="/meowcat/modules/Translators/Translator_info.php" method="post">
+<form action="/meowcat/modules/Translators/Translator_info2.php" method="post">
 <input style="width: 260px;
 
         border: 1px solid #e2e2e2;
@@ -79,25 +89,10 @@
 
         background-position:5px center;
 
-        padding:0 0 0 40px" type="text" name="keywords" placeholder="请输入译者用户名或译者ID">
-<input id="search" style="margin:0 auto" type="submit" value="搜索">
+        padding:0 0 0 40px" type="text" name="keywords" placeholder="请输入译者用户名">
+<input id="search" style="margin:0 auto"  type="submit" value="搜索" onclick="print()"/>
 </div>
 <div class="container-fluid col-md-10 column" style="margin-top:80px">
-<div class="col-sm-50 col-md-50" style="margin:0 auto">
-        <table class="table table-hover">
-            <thead class="thead-dark">
-              <tr>
-                <th class="width:45px">译者ID</th>
-                <th>译者</th>
-                
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Apple</td>
-                <td>1</td>
-             <td><input  type="submit" value="确认添加" /></td>
-      </div>
  </div>	
 </div>
 		</div>
