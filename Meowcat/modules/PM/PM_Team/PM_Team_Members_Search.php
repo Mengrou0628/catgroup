@@ -83,7 +83,7 @@ margin-top:50px;
         background-position:5px center;
 
         padding:0 0 0 40px" type="text" name="keywords" placeholder="请输入译者用户名或译者ID">
-<input id="search" style="margin:0 auto"  type="submit" value="搜索" onclick="print()"/>
+<input id="search" style="margin:0 auto"  type="submit" value="搜索" onclick="Translator_info2.php"/>
 </div>
 <br></br><br></br>
         <table class="table table-hover">
@@ -96,7 +96,6 @@ margin-top:50px;
 $conn=mysqli_connect("localhost","root","");
 mysqli_select_db($conn,"MeowCAT");
 $db=new mysqli("localhost","root","","meowcat");
-$sql1="delete from teamtm where team_id='{$aaa}'";
 $keywords=$_POST['keywords'];
 $sql="select * from users where user_name like'%$keywords%'";
  $result=mysqli_query($conn,$sql);
@@ -107,7 +106,7 @@ die('无法读取数据:'.mysqli_error());
 while($row=mysqli_fetch_assoc($result)){
 echo"<tr><td>{$row['user_id']}</td>";
 echo"<td>{$row['user_name']}</td>";
-echo"<td><a id='link' href='12.php?id={$row['team_id']}'><button name= 'check' type = 'submit'>确认添加</button></td>";
+echo"<td><a id='link' href=''}'><button name= 'check' type = 'submit'>确认添加</button></td>";
 echo"</tr>";
 }
 ?>
